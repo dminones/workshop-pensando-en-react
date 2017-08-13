@@ -1,4 +1,4 @@
-export function getArtists() {
+export function getArtistsData() {
   return [
     {
       external_urls: {

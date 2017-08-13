@@ -9,27 +9,21 @@ import React from 'react';
 
 function SpotifyLogo(props) {
   return (
-    React.createElement('img', {
-      src: "/spotify.svg",
-      alt: 'Spotify Logo',
-      width: props.size,
-      height: props.size,
-      style: { verticalAlign: 'middle' }
-    })
+    <img  src="/spotify.svg" 
+          alt="Spotify Logo" 
+          width={props.size} 
+          height={props.size} 
+          style={ {verticalAlign: 'middle'} } />
   );
 }
 
 function ArtistImage(props) {
   return (
-    React.createElement('div', {
-      className: 'artistImage',
-      style: {
-        width: props.size,
-        height: props.size,
-        borderRadius: props.size,
-        backgroundImage: 'url("' + props.url + '")',
-      }
-    })
+    <div className="artistImage" style={{ width: props.size,
+                                          height: props.size,
+                                          borderRadius: props.size,
+                                          backgroundImage: 'url("' + props.url + '")'
+                                        }} ></div>
   );
 }
 

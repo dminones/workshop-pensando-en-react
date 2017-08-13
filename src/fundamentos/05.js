@@ -17,10 +17,20 @@ import React from "react";
 class Artist extends React.Component {
   constructor() {
     super();
-
     this.state = {
       hovered: false
     };
+
+    this.handleMouseEnter = this.handleMouseEnter.bind(this);
+    this.handleMouseLeave = this.handleMouseLeave.bind(this);
+  }
+
+  handleMouseEnter(ev) {
+    this.setState({hovered:true})
+  }
+
+  handleMouseLeave(ev) {
+    this.setState({hovered:false})
   }
 
   render() {
@@ -31,6 +41,10 @@ class Artist extends React.Component {
           transition: "transform 1s",
           transform: this.state.hovered ? "scale(1.2)" : ""
         }}
+
+        onMouseEnter={this.handleMouseEnter}
+        onMouseLeave={this.handleMouseLeave}
+        onClick={() => this.props.onSelect(this.props.artist.id)}
       >
         <ArtistImage size={200} url={this.props.artist.imageUrl} />
         <span className="artistName">

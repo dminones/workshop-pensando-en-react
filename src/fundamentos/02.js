@@ -27,39 +27,59 @@ export default function Ejercicio2() {
   const logoSize = 20;
   const imageSize = 200;
 
-  return (
-    React.createElement('div', { className: 'artist' },
-      React.createElement('div', {
-        className: 'artistImage',
-        style: {
-          width: imageSize,
-          height: imageSize,
-          borderRadius: imageSize,
-          backgroundImage: 'url("' + artist.imageUrl + '")',
-        }
-      }),
-      React.createElement('span', { className: 'artistName'},
-        artist.name
-      ),
-      React.createElement('span', null,
-        artist.followers,
-        ' Seguidores · ',
-        artist.genres,
-        ' · ',
-        React.createElement('a', {
-          href: artist.spotifyUrl,
-          target: '_blank',
-          rel: 'noopener noreferrer',
-          title: 'Abrir en Spotify'
-        },
-          React.createElement('img', {
-            src: "/spotify.svg",
-            width: logoSize,
-            height: logoSize,
-            style: { verticalAlign: 'middle' }
-          })
+  class SpotifyLogo extends React.Component {
+      render () {
+        return React.createElement('img', {
+              src: this.props.logoImage,
+              width: logoSize,
+              height: logoSize,
+              style: { verticalAlign: 'middle' }
+            })
+      }
+  }
+
+  class ArtistImage extends React.Component {
+    render() {
+      return React.createElement('div', {
+          className: 'artistImage',
+          style: {
+            width: this.props.imageSize,
+            height: this.props.imageSize,
+            borderRadius: this.props.imageSize,
+            backgroundImage: 'url("' + this.props.artistImage + '")',
+          }
+        })
+    }
+  }
+
+  class Artist extends React.Component {
+
+    render() {
+        return React.createElement('div', { className: 'artist' },
+        React.createElement(ArtistImage, {imageSize: imageSize, artistImage:artist.imageUrl}),
+        React.createElement('span', { className: 'artistName'},
+          artist.name
+        ),
+        React.createElement('span', null,
+          artist.followers,
+          ' Seguidores · ',
+          artist.genres,
+          ' · ',
+          React.createElement('a', {
+            href: artist.spotifyUrl,
+            target: '_blank',
+            rel: 'noopener noreferrer',
+            title: 'Abrir en Spotify'
+          },
+            React.createElement(SpotifyLogo, {logoImage:"/spotify.svg"})
+          )
         )
-      )
-    )
+      )      
+    }
+
+  }
+
+  return (
+    React.createElement(Artist, {artist:artist})
   );
 }

@@ -16,14 +16,19 @@ import React from "react";
 // El siguiente export fue agregado para poder correr este ejercicio dentro del proyecto general.
 export default class Ejercicio8 extends React.Component {
   componentDidMount() {
-
+    this.inputEl.focus()
+    this.paragraphEl.animate();
   }
 
   render() {
     return (
       <div>
-        <input placeholder="Yo me debería auto enfocar" size={30} />
-        <FancyParagraph>
+        <input placeholder="Yo me debería auto enfocar" size={30} ref={(el) => {
+          this.inputEl = el;
+        }} />
+        <FancyParagraph ref={(el) => {
+          this.paragraphEl = el;
+        }}>
           Yo debería moverme hacia{" "}
           <span role="img" aria-label="allá">
             👉

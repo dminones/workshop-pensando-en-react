@@ -22,32 +22,43 @@ import ReactDOM from "react-dom";
 
 // El siguiente export fue agregado para poder correr este ejercicio dentro del proyecto general.
 export function ejercicio4A(element) {
-  const state = {
+  var state = {
     artists,
     currentIndex: 0
   };
 
   function handlePrev() {
-
+    state = {
+        artists,
+        currentIndex: state.currentIndex-1, 
+    }
+    render()
   }
 
   function handleNext() {
-
+    state = {
+        artists,
+        currentIndex: state.currentIndex+1, 
+    }
+    render()
   }
 
-  ReactDOM.render(
-    <div>
-      <h2>Con re-render</h2>
-      <ArtistNavigator
-        currentArtist={state.artists[state.currentIndex]}
-        hasPrev={state.currentIndex > 0}
-        hasNext={state.currentIndex < state.artists.length - 1}
-        onPrev={handlePrev}
-        onNext={handleNext}
-      />
-    </div>,
-    element
-  );
+  function render() {
+    ReactDOM.render(
+      <div>
+        <h2>Con re-render</h2>
+        <ArtistNavigator
+          currentArtist={state.artists[state.currentIndex]}
+          hasPrev={state.currentIndex > 0}
+          hasNext={state.currentIndex < state.artists.length - 1}
+          onPrev={handlePrev}
+          onNext={handleNext}
+        />
+      </div>,
+      element
+    );
+  }
+  render()
 }
 
 // El siguiente export fue agregado para poder correr este ejercicio dentro del proyecto general.
@@ -74,11 +85,15 @@ class StatefulArtistNavigator extends React.Component {
   }
 
   handlePrev() {
-
+    this.setState((state,props) => ({
+      currentIndex: state.currentIndex-1,
+    }))
   }
 
   handleNext() {
-
+    this.setState((state,props) => ({
+      currentIndex: state.currentIndex+1,
+    }))
   }
 
   render() {
